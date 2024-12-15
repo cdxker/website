@@ -55,44 +55,44 @@ spec:
       selfHeal: true
       prune: true
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: system-observability
-  namespace: argocd
-spec:
-  project: default
-  source:
-    chart: meta-monitoring
-    repoURL: https://grafana.github.io/helm-charts
-    targetRevision: "1.3.0"
-    helm:
-      releaseName: meta-monitoring
-      valuesObject:
-        cloud:
-          logs:
-            enabled: false
-          metrics:
-            enable: false
-          trace:
-            enabled: false
-        local:
-          grafana:
-            enabled: true
-          logs:
-            enabled: true
-          metrics:
-            enabled: true
-          trace:
-            enabled: true
-          minio:
-            enabled: true
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: observability
-  syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
-    syncOptions:
-      - CreateNamespace=true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: system-observability
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     chart: meta-monitoring
+#     repoURL: https://grafana.github.io/helm-charts
+#     targetRevision: "1.3.0"
+#     helm:
+#       releaseName: meta-monitoring
+#       valuesObject:
+#         cloud:
+#           logs:
+#             enabled: false
+#           metrics:
+#             enable: false
+#           trace:
+#             enabled: false
+#         local:
+#           grafana:
+#             enabled: true
+#           logs:
+#             enabled: true
+#           metrics:
+#             enabled: true
+#           trace:
+#             enabled: true
+#           minio:
+#             enabled: true
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: observability
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
+#       prune: true
+#     syncOptions:
+#       - CreateNamespace=true
