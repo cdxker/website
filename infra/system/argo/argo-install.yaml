@@ -22632,6 +22632,17 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-cm
+data: 
+  admin.enabled: 'false'
+  statusbadge.enabled: 'true'
+  users.anonymous.enabled: 'false'
+  url: http://argo.cdxker.com
+  oidc.config: |
+    name: Keycloak
+    issuer: http://auth.cdxker.com/realms/cdxker
+    clientID: argo-cd
+    clientSecret: $oidc.keycloak.clientSecret
+    requestedScopes: ["openid", "profile", "email", "groups"]
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -22667,6 +22678,9 @@ metadata:
     app.kubernetes.io/name: argocd-rbac-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-rbac-cm
+data:
+  policy.csv: |
+    g, ArgoCDAdmins, role:admin
 ---
 apiVersion: v1
 data:
