@@ -8,12 +8,18 @@ spec:
   # bootstrapAdmin:
   #   user:
   #     secret: "trieve-keycloak-admin-override"
+  #
+  unsupported:
+    podTemplate:
+      spec:
+        nodeSelector:
+          kubernetes.io/hostname: breve
   resources:
     requests:
       cpu: 100m
-      memory: 500Mi
+      memory: 300Mi
     limits:
-      memory: 1Gi
+      memory: 500Mi
   db:
     vendor: postgres
     host: keycloak-postgres-rw

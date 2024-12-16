@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
+kind: Application
 metadata:
-  name: bootstrap-system
+  name: system-argo
   namespace: argocd
 spec:
   project: default
@@ -12,6 +12,44 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: system-cnpg
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:cdxker/website.git
+    path: infra/system/cnpg
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cnpg
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: system-keycloak-operator
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:cdxker/website.git
+    path: infra/system/keycloak-operator
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: keycloak
   syncPolicy:
     automated:
       selfHeal: true
