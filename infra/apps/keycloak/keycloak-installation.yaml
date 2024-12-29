@@ -5,10 +5,6 @@ metadata:
   namespace: keycloak
 spec:
   instances: 1
-  # bootstrapAdmin:
-  #   user:
-  #     secret: "trieve-keycloak-admin-override"
-  #
   unsupported:
     podTemplate:
       spec:
