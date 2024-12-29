@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: bootstrap
+  namespace: argocd
+spec:
+  syncPolicy:
+    applicationsSync: create-only
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: &repoURL https://github.com/cdxker/website
+        revision: &revision master
+        directories:
+          # - path: kubernetes/apps/argocd/*
+          - path: infra/appset/observability/*
+          - path: infra/appset/cert-manager/*
+  template:
+    metadata:
+      name: '{{.path.basename}}'
+    spec:
+      destination:
+        name: in-cluster
+        namespace: '{{ (split "/" .path.path)._2 }}'
+      project: default
+      source:
+        repoURL: *repoURL
+        path: '{{.path.path}}'
+        targetRevision: *revision
+      syncPolicy:
+        automated: {}
+        retry:
+          limit: 10
+          backoff:
+            duration: 1m
+            factor: 2
+            maxDuration: 16m
+        syncOptions:
+          - CreateNamespace=true
+          - RespectIgnoreDifferences=true
+          - ServerSideApply=true
+          - Validate=false

@@ -6,6 +6,11 @@ metadata:
 spec:
   instances: 1
   unsupported:
+    topologySpreadConstraints:
+      - topologyKey: node.kubernetes.io/instance-type
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/managed-by: keycloak-operator
     podTemplate:
       spec:
         nodeSelector:
