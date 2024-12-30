@@ -1,0 +1,5 @@
+immich:
+  redis:
+    enabled: true
+  postgresql:
+    enabled: true
