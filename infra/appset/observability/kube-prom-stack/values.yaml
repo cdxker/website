@@ -1,0 +1,19 @@
+kube-prometheus-stack:
+  alertmanager:
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      pathType: Prefix
+      hosts: ["alert.cdxker.com"]
+  prometheus:
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      pathType: Prefix
+      hosts: ["prom.cdxker.com"]
+  grafana:
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      pathType: Prefix
+      hosts: ["graf.cdxker.com"]
