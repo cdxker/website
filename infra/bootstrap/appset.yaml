@@ -16,6 +16,7 @@ spec:
           # - path: kubernetes/apps/argocd/*
           - path: infra/appset/observability/*
           - path: infra/appset/cert-manager/*
+          - path: infra/appset/default/*
   template:
     metadata:
       name: '{{.path.basename}}'

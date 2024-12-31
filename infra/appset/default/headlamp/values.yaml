@@ -1,0 +1,6 @@
+# config:
+#   oidc:
+#     clientID: headlamp
+#     clientSecret: 
+#     issuerURL: 
+#     scopes: "email"
