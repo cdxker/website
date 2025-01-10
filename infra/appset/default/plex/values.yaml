@@ -1,0 +1,4 @@
+plex-media-server:
+  ingress:
+    enabled: true
+    ingressClassName: traefik
